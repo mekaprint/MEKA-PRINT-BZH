@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meka Print - Maker à Saint-Malo, impression 3D, drone, réparation d'objets et plus. Jeune entrepreneur au service des particuliers et entreprises.">
+    <title>Meka Print - Maker à Saint-Malo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f7;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        header {
+            background: #fff;
+            color: #111;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            background: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #111;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+        }
+        nav a:hover {
+            color: #0071e3;
+            transform: scale(1.05);
+        }
+        section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .prestations {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        .prestation {
+            background: #fff;
+            padding: 35px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .prestation:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        .prestation h3 {
+            margin-bottom: 15px;
+        }
+        .prestation p span {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #0071e3;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: auto;
+        }
+        form input, form textarea, form button {
+            margin-bottom: 15px;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background: #0071e3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        form button:hover {
+            background: #005bb5;
+        }
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        a.social {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+        a.social:hover {
+            color: #0071e3;
+        }
+        .hero {
+            background: url('hero-bg.jpg') center/cover no-repeat;
+            color: #fff;
+            padding: 150px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: auto;
+        }
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bienvenue chez MEKA PRINT</h1>
+    <p>Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie</p>
+</header>
+
+<nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#prestations">Prestations</a>
+    <a href="#apropos">À propos</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="accueil">
+    <h1>Des services créatifs et innovants</h1>
+    <p>Impression 3D, prises de vue par drone, réparation d'objets et hivernage de moulinet, conçus pour les particuliers et entreprises.</p>
+</section>
+
+<section id="prestations">
+    <h2>Mes Prestations & Tarifs</h2>
+    <div class="prestations">
+        <div class="prestation">
+            <h3><i class="fas fa-cube"></i> Impression 3D</h3>
+            <p>Réalisation d'objets personnalisés sur-mesure.<span>À partir de 10 €</span></p>
+        </div>
+        <div class="prestation">
+            <h3><i class="fas fa-drone"></i> Prises de vues drone</h3>
+            <p>Captures aériennes uniques pour événements et projets.<span>À partir de 30 €</span></p>
+        </div>
+        <div class="prestation">
+            <h3><i class="fas fa-tools"></i> Réparation d'objets</h3>
+            <p>Restauration et réparation de vos objets du quotidien.<span>À partir de 15 €</span></p>
+        </div>
+        <div class="prestation">
+            <h3><i class="fas fa-fish"></i> Hivernage de moulinet</h3>
+            <p>Entretien complet pour préparer vos moulinets à la saison prochaine.<span>15 € / moulinet</span></p>
+        </div>
+    </div>
+</section>
+
+<section id="apropos">
+    <h2>À propos de moi</h2>
+    <p>Bonjour, je suis Léo, jeune maker passionné par la technologie depuis mon enfance. Basé à Saint-Malo, je souhaite vivre de mes passions et partager mon expertise avec ma communauté.</p>
+    <p>Avec Meka Print, je propose des solutions innovantes grâce à l'impression 3D, la prise de vue par drone et la réparation d'objets, pour simplifier et enrichir le quotidien des particuliers et entreprises.</p>
+</section>
+
+<section id="contact">
+    <h2>Contactez-moi</h2>
+    <form action="mailto:mekaprint.bzh@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="nom" placeholder="Votre nom" required>
+        <input type="email" name="email" placeholder="Votre email" required>
+        <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
+        <button type="submit">Envoyer</button>
+    </form>
+    <div class="social-icons">
+        <p>Suivez-moi sur : instagram (@mekaprint.bzh)</p>
+        <a href="https://www.instagram.com/mekaprint.bzh" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/mekaprint" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.youtube.com/@mekaprint" target="_blank" class="social"><i class="fab fa-youtube"></i></a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 MEKA PRINT - Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
