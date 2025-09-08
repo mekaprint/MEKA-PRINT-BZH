@@ -16,14 +16,13 @@
         scroll-behavior: smooth;
     }
 
-    /* Bannière responsive avec image complète visible */
-    header {
+    /* Bannière responsive */
+    .banniere {
         width: 100%;
-        height: auto;
-        min-height: 200px; /* hauteur minimum */
-        background: url('banniere.png') center center no-repeat;
-        background-size: contain; /* affiche toute l'image */
-        background-color: #f0f0f0; /* couleur de fond si l'image a de la transparence */
+        max-height: 300px;
+        object-fit: contain; /* toute l'image visible */
+        display: block;
+        margin: 0 auto;
     }
 
     nav {
@@ -180,17 +179,16 @@
         margin-top: 20px;
     }
 
-    /* Logo avant formulaire */
+    /* Logo rond et petit avant formulaire */
     .contact-logo {
         display: block;
         margin: 20px auto;
         width: 80px;
         height: 80px;
-        border-radius: 50%; /* rond */
+        border-radius: 50%;
         object-fit: cover;
     }
 
-    /* Responsive pour petits écrans */
     @media (max-width: 768px) {
         .hero h1 {
             font-size: 32px;
@@ -207,8 +205,11 @@
 </head>
 <body>
 
-<!-- Bannière responsive avec toute l'image visible -->
-<header></header>
+<header>
+    <img src="Bannière-YouTube-de-Jeux-vidéo-Galaxie-Rose-et-Bleu.jpeg" alt="Bannière Meka Print" class="banniere">
+    <h1>Bienvenue chez MEKA PRINT</h1>
+    <p>Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie</p>
+</header>
 
 <nav>
     <a href="#accueil">Accueil</a>
@@ -240,7 +241,7 @@
         </div>
         <div class="prestation">
             <h3><i class="fas fa-fish"></i> Hivernage de moulinet</h3>
-            <p>Entretien complet pour préparer vos moulinets à la saison prochaine.<span>À partir de 15 € </span></p>
+            <p>Entretien complet pour préparer vos moulinets à la saison prochaine.<span>À partir de 15 €</span></p>
         </div>
     </div>
 </section>
@@ -254,10 +255,7 @@
 
 <section id="contact">
     <h2>Contactez-moi</h2>
-
-    <!-- Logo rond et petit -->
-    <img src="logo.png" alt="Logo Meka Print" class="contact-logo">
-
+    <img src="ChatGPT Image 17 mai 2025, 19_20_25.png" alt="Logo Meka Print" class="contact-logo">
     <form action="mailto:mekaprint.bzh@gmail.com" method="post" enctype="text/plain">
         <input type="text" name="nom" placeholder="Votre nom" required>
         <input type="email" name="email" placeholder="Votre email" required>
@@ -278,10 +276,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
