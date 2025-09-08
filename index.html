@@ -11,8 +11,8 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: white; /* Fond blanc */
-            color: black;      /* Texte par défaut noir */
+            background: white;
+            color: black;
             scroll-behavior: smooth;
         }
         header {
@@ -40,7 +40,7 @@
             transition: color 0.3s, transform 0.2s;
         }
         nav a:hover {
-            color: blue; /* survol en bleu */
+            color: blue;
             transform: scale(1.05);
         }
         section {
@@ -48,14 +48,14 @@
             max-width: 1100px;
             margin: auto;
         }
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3 {
             text-align: center;
             margin-bottom: 30px;
             font-weight: 700;
-            color: blue; /* Titres en bleu */
+            color: blue;
         }
         p {
-            color: black; /* Paragraphes en noir */
+            color: black;
         }
         .prestations {
             display: flex;
@@ -76,6 +76,12 @@
         .prestation:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        .prestation img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 12px;
+            margin: 15px 0;
         }
         .prestation h3 {
             margin-bottom: 15px;
@@ -108,7 +114,7 @@
             transition: background 0.3s;
         }
         form button:hover {
-            background: #003399; /* bleu foncé au survol */
+            background: #003399;
         }
         footer {
             background: black;
@@ -126,15 +132,15 @@
             color: blue;
         }
         .hero {
-            background: url('hero-bg.jpg') center/cover no-repeat;
-            color: black; /* texte en noir sur fond image clair */
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            color: black;
             padding: 150px 20px;
             text-align: center;
         }
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
-            color: blue; /* titre bleu */
+            color: blue;
         }
         .hero p {
             font-size: 20px;
@@ -176,6 +182,7 @@
         </div>
         <div class="prestation">
             <h3><i class="fas fa-drone"></i> Prises de vues drone</h3>
+            <img src="images/prestation-drone.jpg" alt="Drone en vol">
             <p>Captures aériennes uniques pour événements et projets.<span>À partir de 30 €</span></p>
         </div>
         <div class="prestation">
