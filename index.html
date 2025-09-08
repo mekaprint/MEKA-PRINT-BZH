@@ -16,13 +16,13 @@
         scroll-behavior: smooth;
     }
 
-    /* Bannière responsive */
+    /* Bannière responsive pleine largeur */
     .banniere {
-        width: 100%;
-        max-height: 300px;
-        object-fit: contain; /* toute l'image visible */
+        width: 100%;        /* toute la largeur de l'écran */
+        height: auto;       /* hauteur proportionnelle */
+        max-height: 300px;  /* optionnel : limite la hauteur */
+        object-fit: contain; /* toute l'image visible sans couper */
         display: block;
-        margin: 0 auto;
     }
 
     nav {
