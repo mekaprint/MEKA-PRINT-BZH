@@ -16,13 +16,25 @@
         scroll-behavior: smooth;
     }
 
-    /* Bannière responsive pleine largeur */
+    /* Header avec bannière */
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
     .banniere {
-        width: 100%;        /* toute la largeur de l'écran */
-        height: auto;       /* hauteur proportionnelle */
-        max-height: 300px;  /* optionnel : limite la hauteur */
-        object-fit: contain; /* toute l'image visible sans couper */
+        width: 100%;
+        max-height: 300px;
+        object-fit: contain; /* toute l'image visible */
         display: block;
+    }
+
+    .header-text {
+        text-align: center;
+        margin: 20px 0 40px 0; /* espace au-dessus et en-dessous */
     }
 
     nav {
@@ -207,8 +219,10 @@
 
 <header>
     <img src="Bannière-YouTube-de-Jeux-vidéo-Galaxie-Rose-et-Bleu.jpeg" alt="Bannière Meka Print" class="banniere">
-    <h1>Bienvenue chez MEKA PRINT</h1>
-    <p>Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie</p>
+    <div class="header-text">
+        <h1>Bienvenue chez MEKA PRINT</h1>
+        <p>Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie</p>
+    </div>
 </header>
 
 <nav>
