@@ -1,292 +1,1194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Meka Print - Maker à Saint-Malo, impression 3D, drone, réparation d'objets et plus.">
-<title>Meka Print - Maker à Saint-Malo</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MEKA PRINT – Léo, maker à Saint-Malo : impression 3D, drone, réparation</title>
+<meta name="description" content="MEKA PRINT, Léo, jeune maker à Saint-Malo : impression 3D, prises de vues par drone, réparation d'objets et hivernage de moulinet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-    body {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: white;
-        color: black;
-        scroll-behavior: smooth;
-    }
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 
-    /* Header avec bannière */
-    header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --bg: #F4F7FF;
+    --surface: #FFFFFF;
+    --ink: #101A3A;
+    --muted: #4A5675;
+    --blue: #0B3FE0;
+    --btn-text: #FFFFFF;
+    --line: #C7D3F2;
+    --grid: rgba(11, 63, 224, .09);
+    --grid-strong: rgba(11, 63, 224, .38);
+    --face-l: #DCE6FF;
+    --face-r: #B9CBFF;
+    --hole: #8FA9FF;
+    --band: #0B3FE0;
+    --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --text: "IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0A1024;
+      --surface: #111A38;
+      --ink: #EEF2FF;
+      --muted: #A6B2D6;
+      --blue: #7E9BFF;
+      --btn-text: #0A1024;
+      --line: #26325E;
+      --grid: rgba(126, 155, 255, .10);
+      --grid-strong: rgba(126, 155, 255, .42);
+      --face-l: #17244F;
+      --face-r: #22336B;
+      --hole: #0A1024;
+      --band: #0B3FE0;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A1024;
+    --surface: #111A38;
+    --ink: #EEF2FF;
+    --muted: #A6B2D6;
+    --blue: #7E9BFF;
+    --btn-text: #0A1024;
+    --line: #26325E;
+    --grid: rgba(126, 155, 255, .10);
+    --grid-strong: rgba(126, 155, 255, .42);
+    --face-l: #17244F;
+    --face-r: #22336B;
+    --hole: #0A1024;
+    --band: #0B3FE0;
+  }
 
-    .banniere {
-        width: 100%;
-        max-height: 300px;
-        object-fit: contain; /* toute l'image visible */
-        display: block;
-    }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 4.5rem); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 1.0625rem; line-height: 1.6; }
+  img, svg { max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
-    .header-text {
-        text-align: center;
-        margin: 20px 0 40px 0; /* espace au-dessus et en-dessous */
-    }
+  .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        background: white;
-        padding: 15px 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-        flex-wrap: wrap;
-    }
+  h1, h2, h3, h4 { font-family: var(--display); margin: 0; line-height: 1.05; }
+  h2 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; font-stretch: 112%; letter-spacing: -0.01em; }
+  h3 { font-size: 1.6rem; font-weight: 800; font-stretch: 110%; }
+  h4 { font-size: 1.05rem; font-weight: 700; font-stretch: 100%; margin-bottom: .5rem; }
+  p { margin: 0; }
+  .lede { color: var(--muted); max-width: 52ch; margin-top: .9rem; }
 
-    nav a {
-        color: black;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s, transform 0.2s;
-    }
+  /* Header + progression de lecture */
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
+  .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--blue); transform-origin: left center; transform: scaleX(var(--p, 0)); }
+  .brand { font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: clamp(1.05rem, 4vw, 1.4rem); letter-spacing: -0.01em; text-decoration: none; white-space: nowrap; }
+  .site-nav { display: flex; align-items: center; gap: clamp(.9rem, 2vw, 1.6rem); font-size: .95rem; font-weight: 500; }
+  .site-nav a { text-decoration: none; }
+  .site-nav a:hover { color: var(--blue); }
+  .site-nav .nav-cta { background: var(--blue); color: var(--btn-text); padding: .45rem .95rem; border-radius: 4px; font-weight: 600; }
+  .site-nav .nav-cta:hover { color: var(--btn-text); filter: brightness(1.1); }
+  @media (max-width: 760px) { .site-nav a:not(.nav-cta) { display: none; } }
 
-    nav a:hover {
-        color: blue;
-        transform: scale(1.05);
-    }
+  /* Boutons */
+  .btn { display: inline-block; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; padding: .8rem 1.4rem; border-radius: 4px; border: 2px solid var(--blue); }
+  .btn-primary { background: var(--blue); color: var(--btn-text); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+  .btn-sm { padding: .5rem 1rem; font-size: .95rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
 
-    section {
-        padding: 80px 20px;
-        max-width: 1100px;
-        margin: auto;
-    }
+  /* Hero */
+  .hero { position: relative; padding-block: clamp(2rem, 5vw, 3.5rem) clamp(4rem, 8vw, 6rem); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--grid-strong) 1px, transparent 1px), linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(circle 190px at var(--mx, -400px) var(--my, -400px), #000 0%, transparent 100%); mask-image: radial-gradient(circle 190px at var(--mx, -400px) var(--my, -400px), #000 0%, transparent 100%); }
+  .hero::after { content: ""; position: absolute; top: 1.25rem; right: clamp(1rem, 4vw, 2.5rem); width: clamp(2.5rem, 7vw, 5rem); height: clamp(2.5rem, 7vw, 5rem); border-top: 4px solid var(--blue); border-right: 4px solid var(--blue); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .wordmark { font-size: clamp(4.5rem, 22vw, 14.5rem); font-weight: 900; font-stretch: 125%; letter-spacing: -0.03em; line-height: .86; margin-left: -0.04em; }
+  .hero-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+  .tagline { font-family: var(--display); font-weight: 700; font-stretch: 105%; font-size: clamp(1.5rem, 3.4vw, 2.25rem); line-height: 1.15; }
+  .hero-body .sub { margin-top: 1rem; color: var(--muted); max-width: 44ch; }
+  @media (max-width: 820px) { .hero-body { grid-template-columns: 1fr; } }
 
-    h1, h2, h3 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-weight: 700;
-        color: blue;
-    }
+  .part { width: 100%; height: auto; display: block; max-width: 440px; margin-inline: auto; cursor: pointer; }
+  .part .ink { stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; fill: none; }
+  .part .dim { stroke: var(--blue); stroke-width: 1.5; fill: none; stroke-linecap: round; }
+  .part text { font-family: var(--text); font-size: 13px; font-weight: 500; fill: var(--blue); text-anchor: middle; }
+  .part .f-top { fill: var(--surface); }
+  .part .f-left { fill: var(--face-l); }
+  .part .f-right { fill: var(--face-r); }
+  .part .f-hole { fill: var(--hole); }
+  .part .hole-grp { transition: transform .35s cubic-bezier(.3,1.4,.5,1); transform-origin: 200px 102px; }
+  .part:hover .hole-grp, .part:focus-visible .hole-grp { transform: scale(1.35); }
+  @media (prefers-reduced-motion: no-preference) {
+    .part .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.5s cubic-bezier(.4,.1,.2,1) .2s forwards; }
+    .part .f { fill-opacity: 0; animation: fillin .7s ease 1.1s forwards; }
+    .part .dims { opacity: 0; animation: fillin .6s ease 1.7s forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes fillin { to { fill-opacity: 1; opacity: 1; } }
+  }
 
-    p {
-        color: black;
-    }
+  /* Créneaux : clin d'œil aux remparts de Saint-Malo */
+  .ramparts { display: block; position: absolute; top: -15px; left: 0; height: 16px; width: 100%; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16' viewBox='0 0 40 16'%3E%3Crect x='0' y='0' width='24' height='9'/%3E%3Crect x='0' y='8' width='40' height='8'/%3E%3C/svg%3E") repeat-x 0 0 / 40px 16px; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16' viewBox='0 0 40 16'%3E%3Crect x='0' y='0' width='24' height='9'/%3E%3Crect x='0' y='8' width='40' height='8'/%3E%3C/svg%3E") repeat-x 0 0 / 40px 16px; }
+  .ramparts-surface { background: var(--surface); }
+  .ramparts-band { background: var(--band); }
+  .rel, .on-surface { position: relative; }
 
-    .prestations {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
+  .section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .section-top { padding-top: clamp(2rem, 5vw, 3.5rem); }
+  .on-surface { background: var(--surface); }
+  .section-head { margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
 
-    .prestation {
-        background: white;
-        padding: 35px;
-        border-radius: 20px;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+  /* Prestations */
+  .service { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(1.25rem, 4vw, 3rem); padding-block: clamp(1.75rem, 4vw, 2.5rem); border-top: 1px solid var(--line); }
+  .service:last-of-type { border-bottom: 1px solid var(--line); }
+  .service-icon { width: 3rem; height: 3rem; color: var(--blue); margin-bottom: .9rem; transition: transform .4s cubic-bezier(.3,1.4,.5,1); }
+  .service:hover .service-icon { transform: rotate(-8deg) scale(1.1); }
+  .service p.what { color: var(--muted); margin-top: .6rem; max-width: 34ch; }
+  .groups { display: grid; gap: 1.5rem; align-content: start; }
+  .items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem; }
+  .items li { border-bottom: 1px solid var(--line); }
+  .item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%; text-align: left; font: inherit; color: inherit; background: none; border: 0; padding: .55rem 0; cursor: pointer; transition: padding-left .2s ease, color .2s ease; }
+  .item::after { content: "+"; font-weight: 600; color: var(--blue); opacity: .45; transition: opacity .2s ease, transform .2s ease; }
+  .item:hover, .item:focus-visible { color: var(--blue); padding-left: .5rem; }
+  .item:hover::after, .item:focus-visible::after { opacity: 1; transform: rotate(90deg); }
+  .tip { color: var(--muted); font-size: .95rem; margin-top: 1rem; }
+  @media (max-width: 760px) { .service { grid-template-columns: 1fr; } .items { grid-template-columns: 1fr; } }
 
-    .prestation:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
+  /* Atelier 3D */
+  .lab { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start; }
+  .stage { position: relative; aspect-ratio: 4 / 3; min-height: 280px; border: 1.5px solid var(--line); border-radius: 6px; background-color: var(--surface); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; overflow: hidden; cursor: grab; touch-action: pan-y; }
+  .stage.dragging { cursor: grabbing; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
+  .stage::before, .stage::after { content: ""; position: absolute; width: 1.6rem; height: 1.6rem; pointer-events: none; }
+  .stage::before { top: .6rem; left: .6rem; border-top: 3px solid var(--blue); border-left: 3px solid var(--blue); }
+  .stage::after { bottom: .6rem; right: .6rem; border-bottom: 3px solid var(--blue); border-right: 3px solid var(--blue); }
+  .hud { position: absolute; top: 1.1rem; left: 2.6rem; font-weight: 600; font-size: .9rem; color: var(--blue); pointer-events: none; }
+  .hint { position: absolute; bottom: .9rem; left: 0; right: 0; text-align: center; font-size: .85rem; color: var(--muted); pointer-events: none; }
+  .glfail { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; color: var(--muted); }
+  .glfail[hidden] { display: none; }
+  .tools { display: grid; gap: .9rem; margin-top: 1rem; }
+  .tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; }
+  .layer { display: grid; gap: .25rem; flex: 1 1 240px; }
+  .layer-out { font-size: .9rem; color: var(--muted); }
+  input[type="range"] { width: 100%; accent-color: var(--blue); }
+  .param { display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; row-gap: .15rem; margin-bottom: 1rem; }
+  .param label { font-weight: 600; }
+  .param output { font-variant-numeric: tabular-nums; color: var(--blue); font-weight: 600; }
+  .param input { grid-column: 1 / -1; }
+  .swatches { display: flex; gap: .6rem; }
+  .swatches input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .swatches label { width: 2.4rem; height: 2.4rem; border-radius: 50%; cursor: pointer; border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--line); display: block; transition: transform .15s ease, box-shadow .15s ease; }
+  .swatches label:hover { transform: scale(1.08); }
+  .swatches input:checked + label { box-shadow: 0 0 0 3px var(--ink); }
+  .swatches input:focus-visible + label { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .readout-3d { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: 1rem 0; margin: 1rem 0 1.25rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .readout-3d dt { font-size: .9rem; color: var(--muted); }
+  .readout-3d dd { margin: 0; font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .fine { font-size: .9rem; color: var(--muted); margin-top: .75rem; }
+  @media (max-width: 900px) { .lab { grid-template-columns: 1fr; } }
 
-    .prestation img {
-        width: 100%;
-        max-width: 250px;
-        border-radius: 12px;
-        margin: 15px 0;
-    }
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chips input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chips label { cursor: pointer; padding: .45rem .85rem; border: 1.5px solid var(--line); border-radius: 999px; font-size: .95rem; background: var(--bg); }
+  .chips label:hover { border-color: var(--blue); }
+  .chips input:checked + label { background: var(--blue); border-color: var(--blue); color: var(--btn-text); font-weight: 600; }
+  .chips input:focus-visible + label { outline: 3px solid var(--blue); outline-offset: 2px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 1.1rem; min-width: 0; }
+  legend { font-weight: 600; padding: 0; margin-bottom: .5rem; }
 
-    .prestation h3 {
-        margin-bottom: 15px;
-    }
+  /* Aperçu web */
+  .web { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start; }
+  .browser { border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; transition: max-width .4s cubic-bezier(.3,1,.5,1); max-width: 100%; margin-inline: auto; box-shadow: 8px 8px 0 var(--line); }
+  .browser.is-mobile { max-width: 300px; }
+  .bar { display: flex; align-items: center; gap: .75rem; padding: .55rem .8rem; background: #E9EEFB; border-bottom: 1px solid #CDD7F2; }
+  .dots { display: flex; gap: .3rem; }
+  .dots i { width: .6rem; height: .6rem; border-radius: 50%; background: #9AA8D0; display: block; }
+  .url { flex: 1; background: #fff; border-radius: 4px; padding: .15rem .6rem; font-size: .8rem; color: #4A5675; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mock { container-type: inline-size; color: #14203F; background: #fff; }
+  .mock-in { animation: mockin .35s ease; }
+  @keyframes mockin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .mock-in { animation: none; } }
+  .m-nav { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .8rem 1rem; border-bottom: 1px solid #E5EAF7; font-size: .85rem; }
+  .m-nav b { color: var(--acc); font-family: var(--display); font-weight: 800; font-stretch: 110%; }
+  .m-links { display: flex; gap: 1rem; color: #4A5675; }
+  .m-hero { position: relative; overflow: hidden; padding: 2rem 1.25rem 2.25rem; background: color-mix(in srgb, var(--acc) 11%, #fff); }
+  .m-hero::after { content: ""; position: absolute; right: -2rem; top: -2rem; width: 9rem; height: 9rem; border-radius: 50%; background: var(--acc); opacity: .18; }
+  .m-hero h4 { font-size: 1.5rem; max-width: 16ch; position: relative; z-index: 1; }
+  .m-hero p { max-width: 34ch; margin-top: .5rem; color: #4A5675; font-size: .95rem; position: relative; z-index: 1; }
+  .m-btn { display: inline-block; margin-top: 1rem; padding: .5rem 1rem; background: var(--acc); color: #fff; border-radius: 4px; font-weight: 600; font-size: .9rem; position: relative; z-index: 1; }
+  .m-body { padding: 1.25rem 1rem 1.5rem; display: grid; gap: .75rem; }
+  .m-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .m-card { border: 1px solid #DDE4F5; border-top: 4px solid var(--acc); padding: .75rem; border-radius: 4px; font-size: .85rem; }
+  .m-card b { display: block; margin-bottom: .25rem; }
+  .m-card span { color: #4A5675; }
+  .m-row { display: flex; align-items: center; gap: .9rem; padding: .6rem .75rem; border: 1px solid #DDE4F5; border-radius: 4px; font-size: .9rem; }
+  .m-date { flex: none; width: 2.9rem; text-align: center; background: var(--acc); color: #fff; border-radius: 4px; padding: .2rem 0; line-height: 1.1; }
+  .m-date b { display: block; font-size: 1.1rem; }
+  .m-date small { font-size: .7rem; }
+  .m-contact { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: .75rem 1rem; background: var(--acc); color: #fff; border-radius: 4px; font-weight: 600; font-size: .9rem; }
+  @container (max-width: 460px) {
+    .m-cards { grid-template-columns: 1fr; }
+    .m-links { display: none; }
+    .m-hero h4 { font-size: 1.25rem; }
+  }
+  .cap { text-align: center; font-size: .9rem; color: var(--muted); margin-top: 1.5rem; }
+  @media (max-width: 900px) { .web { grid-template-columns: 1fr; } .browser { box-shadow: 5px 5px 0 var(--line); } }
 
-    .prestation p span {
-        display: block;
-        margin-top: 12px;
-        font-weight: bold;
-        color: blue;
-    }
+  /* Pour qui */
+  .who { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(1.25rem, 4vw, 3rem); align-items: start; }
+  .audience { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem .25rem; }
+  .audience button { font-family: var(--display); font-weight: 700; font-stretch: 105%; font-size: clamp(1.1rem, 2.2vw, 1.4rem); line-height: 1.2; color: var(--ink); background: none; border: 0; border-left: 3px solid var(--line); padding: .2rem .9rem; cursor: pointer; transition: color .2s ease, border-color .2s ease; }
+  .audience button:hover { border-left-color: var(--blue); }
+  .audience button[aria-pressed="true"] { color: var(--blue); border-left-color: var(--blue); }
+  .who-note { margin-top: 1.25rem; padding: .25rem 0 .25rem 1rem; border-left: 3px solid var(--blue); max-width: 60ch; min-height: 3.2em; }
+  @media (max-width: 760px) { .who { grid-template-columns: 1fr; } }
 
-    form {
-        display: flex;
-        flex-direction: column;
-        max-width: 500px;
-        margin: auto;
-    }
+  /* Illustrations de prestations (dessinées en SVG, pas de photo) */
+  .illus-frame {
+    position: relative; border: 1.5px solid var(--line); border-radius: 6px;
+    background-color: var(--surface);
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px; overflow: hidden; margin-bottom: 1rem;
+    opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease;
+  }
+  .illus-frame.in { opacity: 1; transform: none; }
+  .illus-frame svg { display: block; width: 100%; height: auto; }
+  .i-ink { stroke: var(--ink); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .i-thin { stroke-width: 1.5; }
+  .i-fs { fill: var(--surface); } .i-fl { fill: var(--face-l); } .i-fr { fill: var(--face-r); }
+  .i-fb { fill: var(--blue); } .i-fo { fill: #FF7A1A; } .i-fk { fill: var(--ink); } .i-fw { fill: #fff; }
+  .i-lbl { font: 600 15px var(--text); fill: var(--blue); text-anchor: middle; }
+  .i-lbk { font: 700 14px var(--text); fill: var(--ink); }
+  .i-lay { fill: var(--blue); stroke: rgba(255,255,255,.4); stroke-width: 1.5; }
+  .i-fil { fill: none; stroke: #FF7A1A; stroke-width: 3; stroke-dasharray: 6 6; }
+  .i-cloud ellipse { fill: var(--face-l); }
+  .i-seaf { fill: var(--face-r); }
+  .i-fov { fill: var(--blue); fill-opacity: .14; stroke: var(--blue); stroke-width: 1.5; stroke-dasharray: 6 6; }
+  .i-wire { fill: none; stroke: var(--blue); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .i-gt { fill: none; stroke: var(--ink); stroke-width: 8; stroke-dasharray: 6 5; }
+  .i-snow path { fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; }
+  @media (prefers-reduced-motion: no-preference) {
+    .illus-frame.in .i-a-drift { animation: i-drift 9s ease-in-out infinite; }
+    .illus-frame.in .i-a-drift2 { animation: i-drift 12s ease-in-out infinite reverse; }
+    .illus-frame.in .i-a-bob { animation: i-bob 3.2s ease-in-out infinite; }
+    .illus-frame.in .i-a-blink { animation: i-blink 1.4s ease-in-out infinite; }
+    .illus-frame.in .i-a-rise { animation: i-printbob .9s ease-in-out infinite; }
+    .illus-frame.in .i-a-head { animation: i-head 1.8s ease-in-out infinite; }
+    .illus-frame.in .i-a-gear { animation: i-spin 4s linear infinite; }
+    .illus-frame.in .i-a-gear2 { animation: i-spin-rev 3s linear infinite; }
+    .illus-frame.in .i-a-driver { animation: i-driver 1.6s ease-in-out infinite; }
+    .illus-frame.in .i-a-pop { animation: i-pop 2.6s ease-in-out infinite; }
+    .illus-frame.in .i-a-star { animation: i-twinkle 1.8s ease-in-out infinite; }
+    .illus-frame.in .i-a-star2 { animation: i-twinkle 2.3s ease-in-out infinite .4s; }
+    .illus-frame.in .i-a-crank { animation: i-spin 3s linear infinite; }
+    .illus-frame.in .i-snow { animation: i-fall 5s linear infinite; }
+  }
+  @keyframes i-drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(14px); } }
+  @keyframes i-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes i-blink { 0%,100% { opacity: 1; } 50% { opacity: .2; } }
+  @keyframes i-printbob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+  @keyframes i-head { 0%,100% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+  @keyframes i-spin { to { transform: rotate(360deg); } }
+  @keyframes i-spin-rev { to { transform: rotate(-360deg); } }
+  @keyframes i-driver { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-16deg); } }
+  @keyframes i-pop { 0%,20%,100% { transform: scale(1); } 10% { transform: scale(1.14); } }
+  @keyframes i-twinkle { 0%,100% { opacity: .25; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+  @keyframes i-fall { 0% { transform: translateY(-6px); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
 
-    form input, form textarea, form button {
-        margin-bottom: 15px;
-        padding: 15px;
-        font-size: 16px;
-        border-radius: 12px;
-        border: 1px solid #ccc;
-    }
+  .p-card { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .p-price { display: inline-block; font-family: var(--display); font-weight: 800; font-stretch: 108%; color: var(--blue); margin-top: .4rem; }
+  .p-ask { margin-top: .9rem; }
 
-    form button {
-        background: blue;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        transition: background 0.3s;
-    }
 
-    form button:hover {
-        background: #003399;
-    }
+  /* Méthode */
+  .stepper { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .track { position: absolute; top: calc(1.6rem - 1.5px); left: 12.5%; width: 75%; height: 3px; background: var(--line); }
+  .track i { display: block; height: 100%; width: var(--fill, 0%); background: var(--blue); transition: width .5s cubic-bezier(.4,.1,.2,1); }
+  .step-tab { position: relative; z-index: 1; display: grid; justify-items: center; gap: .6rem; padding: 0 .25rem .5rem; background: none; border: 0; font: inherit; color: inherit; cursor: pointer; }
+  .node { width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 3px solid var(--line); font-family: var(--display); font-weight: 800; font-size: 1.2rem; transition: background .3s ease, border-color .3s ease, color .3s ease, transform .3s ease; }
+  .step-tab:hover .node { border-color: var(--blue); }
+  .step-tab.done .node, .step-tab[aria-selected="true"] .node { background: var(--blue); border-color: var(--blue); color: var(--btn-text); }
+  .step-tab[aria-selected="true"] .node { transform: scale(1.12); }
+  .lbl { font-family: var(--display); font-weight: 800; font-size: clamp(.72rem, 2.7vw, 1.05rem); }
+  .step-panel { margin-top: 1.5rem; padding-top: 1.75rem; border-top: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); align-items: start; animation: mockin .35s ease; }
+  .bignum { font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: clamp(5rem, 12vw, 9rem); line-height: .8; color: transparent; -webkit-text-stroke: 2px var(--blue); }
+  .step-panel p { color: var(--muted); }
+  @media (max-width: 760px) { .step-panel { grid-template-columns: 1fr; } .bignum { font-size: 4.5rem; } }
+  .method-note { margin-top: 2rem; font-weight: 500; }
 
-    footer {
-        background: black;
-        color: white;
-        text-align: center;
-        padding: 40px 20px;
-    }
+  /* Contact */
+  .contact { background: var(--band); color: #FFFFFF; padding-block: clamp(3rem, 7vw, 5rem); }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.75rem, 5vw, 4rem); align-items: start; }
+  .contact h2 { color: #FFFFFF; }
+  .contact .lede { color: rgba(255,255,255,.85); }
+  .coords { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; gap: .9rem; }
+  .coords li { display: grid; grid-template-columns: 6.5rem 1fr; gap: .75rem; align-items: baseline; padding-bottom: .9rem; border-bottom: 1px solid rgba(255,255,255,.3); }
+  .coords .k { font-weight: 600; color: rgba(255,255,255,.85); }
+  .coords a { color: #FFFFFF; font-weight: 600; }
+  .coords .todo { opacity: .75; font-style: italic; }
+  .panel { background: var(--surface); color: var(--ink); padding: clamp(1.25rem, 3vw, 2rem); border-radius: 6px; }
+  .panel h3 { font-size: 1.35rem; margin-bottom: 1rem; }
+  .field { display: grid; gap: .35rem; margin-bottom: 1rem; }
+  .field label { font-weight: 600; }
+  .field input, .field textarea { font: inherit; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 4px; padding: .65rem .8rem; width: 100%; }
+  .field textarea { min-height: 7rem; resize: vertical; }
+  .field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+  .readout { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .readout[hidden] { display: none; }
+  .readout p { color: var(--muted); font-size: .95rem; margin-bottom: .6rem; }
+  .readout textarea { font: inherit; font-size: .95rem; width: 100%; min-height: 8rem; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 4px; padding: .65rem .8rem; }
+  .readout .actions { margin-top: .75rem; }
+  .status { margin-top: .6rem; font-weight: 600; color: var(--blue); min-height: 1.5em; }
+  @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
 
-    a.social {
-        color: black;
-        text-decoration: none;
-        margin: 0 10px;
-        font-weight: 600;
-    }
-
-    a.social:hover {
-        color: blue;
-    }
-
-    .hero {
-        background: url('hero-bg.jpg') center/cover no-repeat;
-        color: black;
-        padding: 150px 20px;
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-        margin-bottom: 20px;
-        color: blue;
-    }
-
-    .hero p {
-        font-size: 20px;
-        max-width: 700px;
-        margin: auto;
-        color: black;
-    }
-
-    .social-icons {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    /* Logo rond et petit avant formulaire */
-    .contact-logo {
-        display: block;
-        margin: 20px auto;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    @media (max-width: 768px) {
-        .hero h1 {
-            font-size: 32px;
-        }
-        .hero p {
-            font-size: 16px;
-        }
-        nav {
-            gap: 20px;
-        }
-    }
-
+  /* Pied de page : Saint-Malo et la mer */
+  footer { position: relative; background: var(--bg); }
+  .skyline { display: block; width: 100%; max-width: 1200px; height: auto; margin-inline: auto; color: var(--ink); margin-bottom: -1px; }
+  .sea { position: relative; background: var(--band); color: #fff; padding-block: 2.25rem 1.75rem; margin-top: -2px; }
+  .waves { position: absolute; left: 0; right: 0; top: -14px; height: 16px; overflow: hidden; pointer-events: none; }
+  .waves svg { display: block; width: 200%; height: 16px; }
+  .waves .w1 { fill: var(--band); }
+  .waves .w2 { fill: #fff; opacity: .16; }
+  @media (prefers-reduced-motion: no-preference) {
+    .waves .w-a { animation: wave 11s linear infinite; }
+    .waves .w-b { animation: wave 17s linear infinite reverse; }
+    @keyframes wave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  }
+  .sea .wrap { display: flex; flex-wrap: wrap; gap: .5rem 2rem; justify-content: space-between; font-size: .95rem; }
+  .sea .brand { color: #fff; }
 </style>
 </head>
 <body>
 
-<header>
-    <img src="Bannière-YouTube-de-Jeux-vidéo-Galaxie-Rose-et-Bleu.jpeg" alt="Bannière Meka Print" class="banniere">
-    <div class="header-text">
-        <h1>Bienvenue chez MEKA PRINT</h1>
-        <p>Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie</p>
-    </div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="MEKA, retour à l'accueil">MEKA</a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <a href="#prestations">Prestations</a>
+      <a href="#atelier-3d">Atelier 3D</a>
+      <a href="#apropos">À propos</a>
+      <a href="#methode">Méthode</a>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+  <span class="progress" id="progress" aria-hidden="true"></span>
 </header>
 
-<nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#prestations">Prestations</a>
-    <a href="#apropos">À propos</a>
-    <a href="#contact">Contact</a>
-</nav>
-
-<section class="hero" id="accueil">
-    <h1>Des services créatifs et innovants</h1>
-    <p>Impression 3D, prises de vue par drone, réparation d'objets et hivernage de moulinet, conçus pour les particuliers.</p>
-</section>
-
-<section id="prestations">
-    <h2>Mes Prestations & Tarifs</h2>
-    <div class="prestations">
-        <div class="prestation">
-            <h3><i class="fas fa-cube"></i> Impression 3D</h3>
-            <p>Réalisation d'objets personnalisés sur-mesure.<span>À partir de 10 €</span></p>
+<main id="accueil">
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <h1 class="wordmark">MEKA<span style="font-size:.24em;vertical-align:.62em;letter-spacing:.06em;margin-left:.08em">PRINT</span></h1>
+      <div class="hero-body">
+        <div>
+          <p class="tagline">Jeune maker à Saint-Malo, passionné par l'impression 3D et la technologie.</p>
+          <p class="sub">Impression 3D, prises de vues par drone, réparation d'objets et hivernage de moulinet : des services créatifs et innovants pour les particuliers.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Me contacter</a>
+            <a class="btn btn-ghost" href="#atelier-3d">Essayer l'atelier 3D</a>
+          </div>
         </div>
-        <div class="prestation">
-            <h3><i class="fas fa-drone"></i> Prises de vues drone</h3>
-            <img src="prestation-drone.jpg" alt="Drone en vol">
-            <p>Captures aériennes uniques pour événements et projets.<span>À partir de 30 €</span></p>
-        </div>
-        <div class="prestation">
-            <h3><i class="fas fa-tools"></i> Réparation d'objets</h3>
-            <p>Restauration et réparation de vos objets du quotidien, petit électroménager.<span>À partir de 15 €</span></p>
-        </div>
-        <div class="prestation">
-            <h3><i class="fas fa-fish"></i> Hivernage de moulinet</h3>
-            <p>Entretien complet pour préparer vos moulinets à la saison prochaine.<span>À partir de 15 €</span></p>
-        </div>
+        <svg class="part" viewBox="0 0 400 320" role="img" tabindex="0" aria-label="Pièce 3D vue en perspective isométrique, avec ses cotes : 40 millimètres de côté et un perçage de 12 millimètres.">
+          <g>
+            <path class="ink draw f f-left" pathLength="1" d="M110 102 L200 154 L200 258 L110 206 Z"/>
+            <path class="ink draw f f-right" pathLength="1" d="M200 154 L290 102 L290 206 L200 258 Z"/>
+            <path class="ink draw f f-top" pathLength="1" d="M200 50 L290 102 L200 154 L110 102 Z"/>
+            <g class="hole-grp"><ellipse class="ink draw f f-hole" pathLength="1" cx="200" cy="102" rx="34" ry="19.6"/></g>
+          </g>
+          <g class="dims">
+            <path class="dim" d="M107 211 L94 234 M197 263 L184 286 M97 229 L187 281"/>
+            <text transform="rotate(30 128 274)" x="128" y="274">40 mm</text>
+            <path class="dim" d="M294 102 L318 102 M294 206 L318 206 M312 102 L312 206"/>
+            <text transform="rotate(-90 331 154)" x="331" y="154">40 mm</text>
+            <path class="dim" d="M178 92 L130 50 L98 50"/>
+            <text x="94" y="55" style="text-anchor:end">Ø 12 mm</text>
+          </g>
+        </svg>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="apropos">
-    <h2>À propos de moi</h2>
-    <p>Bonjour et bienvenue sur mon site internet. Je m’appelle Léo, créateur de MEKA PRINT à 15 ans. Je suis un jeune maker basé à Saint-Malo. Depuis mon enfance, je suis passionné par la technologie, l’innovation et la fabrication. J’ai commencé avec l’impression 3D et, au fil du temps, j’ai élargi mes compétences vers la prise de vues par drone, l'hivernage de moulinet et la réparation d’objets du quotidien.</p>
-    <p>Mon objectif est simple : mettre ma créativité et mon savoir-faire au service des particuliers, en proposant des solutions utiles, innovantes et accessibles.</p>
-    <p>Avec MEKA PRINT, je souhaite partager ma passion, développer des projets uniques et inspirer ceux qui, comme moi, aiment donner vie à leurs idées.</p>
-</section>
+  <section id="prestations" class="on-surface" aria-labelledby="t-prestations">
+    <span class="ramparts ramparts-surface" aria-hidden="true"></span>
+    <div class="section section-top wrap">
+      <div class="section-head">
+        <h2 id="t-prestations">Mes prestations & tarifs</h2>
+        <p class="lede">Quatre services pour les particuliers, de l'objet imprimé sur-mesure aux images vues du ciel. Cliquez sur une prestation : elle s'ajoute à votre message de contact.</p>
+      </div>
 
-<section id="contact">
-    <h2>Contactez-moi</h2>
-    <img src="ChatGPT Image 17 mai 2025, 19_20_25.png" alt="Logo Meka Print" class="contact-logo">
-    <form action="mailto:mekaprint.bzh@gmail.com" method="post" enctype="text/plain">
-        <input type="text" name="nom" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="Votre email" required>
-        <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
-    <div class="social-icons">
-        <p>Suivez-moi sur :</p>
-        <a href="https://www.instagram.com/mekaprint.bzh" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/mekaprint" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.youtube.com/@mekaprint" target="_blank" class="social"><i class="fab fa-youtube"></i></a>
+      <article class="service">
+        <div class="p-card">
+          <div class="illus-frame reveal">
+            <svg viewBox="0 0 560 380" role="img" aria-label="Illustration : une imprimante 3D dépose la matière couche par couche pour façonner un objet."><g class="i-sc" data-scene="print">
+  <rect class="i-ink i-fl" x="96" y="318" width="368" height="24" rx="5"/>
+  <rect class="i-ink i-fs" x="150" y="304" width="260" height="14" rx="2"/>
+  <rect class="i-ink i-fr" x="118" y="86" width="22" height="232" rx="3"/>
+  <rect class="i-ink i-fr" x="420" y="86" width="22" height="232" rx="3"/>
+  <rect class="i-ink i-fl" x="108" y="66" width="344" height="24" rx="5"/>
+  <rect class="i-lay l0" x="232.0" y="294" width="96" height="10" rx="3"/>
+  <rect class="i-lay l1" x="229.0" y="284" width="102" height="10" rx="3"/>
+  <rect class="i-lay l2" x="227.0" y="274" width="106" height="10" rx="3"/>
+  <rect class="i-lay l3" x="231.0" y="264" width="98" height="10" rx="3"/>
+  <rect class="i-lay l4" x="237.0" y="254" width="86" height="10" rx="3"/>
+  <rect class="i-lay l5" x="244.0" y="244" width="72" height="10" rx="3"/>
+  
+  <g class="i-a-rise">
+    <rect class="i-ink i-fs" x="140" y="206" width="280" height="12" rx="3"/>
+    <g class="i-a-head">
+      <rect class="i-ink i-fb" x="246" y="196" width="68" height="34" rx="6"/>
+      <rect class="i-fs" x="256" y="204" width="20" height="8" rx="2"/>
+      <polygon class="i-ink i-fo" points="270,230 290,230 280,244"/>
+    </g>
+  </g>
+  <circle class="i-ink i-fo" cx="496" cy="150" r="46"/>
+  <circle class="i-ink i-fs" cx="496" cy="150" r="14"/>
+  <path class="i-ink i-thin" d="M496 104 V196 M450 150 H542 M463 117 L529 183 M529 117 L463 183"/>
+  <path class="i-fil" d="M496 104 C496 30 300 30 280 196"/>
+  <text class="i-lbl" x="280" y="368">Couche après couche</text>
+</g></svg>
+          </div>
+        </div>
+        <div>
+          <h3>Impression 3D</h3>
+          <p class="what">Réalisation d'objets personnalisés sur-mesure, à l'unité.</p>
+          <span class="p-price">À partir de 10&nbsp;€</span>
+          <div class="p-ask"><button type="button" class="item" data-need="n1" data-label="Impression 3D">Demander une impression 3D</button></div>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="p-card">
+          <div class="illus-frame reveal">
+            <svg viewBox="0 0 560 380" role="img" aria-label="Illustration : un drone survole les remparts de Saint-Malo pour une prise de vues aérienne."><g class="i-sc" data-scene="drone">
+  <g class="i-a-drift"><g class="i-cloud"><ellipse cx="96" cy="78" rx="36" ry="11"/><ellipse cx="116" cy="68" rx="20" ry="11"/><ellipse cx="80" cy="70" rx="16" ry="9"/></g></g>
+  <g class="i-a-drift2"><g class="i-cloud"><ellipse cx="452" cy="52" rx="30" ry="9"/><ellipse cx="468" cy="44" rx="16" ry="9"/></g></g>
+  <g class="i-fk">
+    <path d="M0 286 H560 V320 H0Z"/>
+    <path id="mer2" d="M0 274h14v12h-14zM24 274h14v12h-14zM48 274h14v12h-14zM72 274h14v12h-14zM96 274h14v12h-14zM120 274h14v12h-14zM144 274h14v12h-14zM168 274h14v12h-14zM192 274h14v12h-14zM216 274h14v12h-14zM240 274h14v12h-14zM264 274h14v12h-14zM288 274h14v12h-14zM312 274h14v12h-14zM336 274h14v12h-14zM360 274h14v12h-14zM384 274h14v12h-14zM408 274h14v12h-14zM432 274h14v12h-14zM456 274h14v12h-14zM480 274h14v12h-14zM504 274h14v12h-14zM528 274h14v12h-14zM552 274h14v12h-14z"/>
+    <rect x="56" y="236" width="34" height="42"/><polygon points="52,236 94,236 73,204"/>
+    <rect x="236" y="256" width="110" height="24"/><rect x="278" y="218" width="26" height="38"/><polygon points="275,218 307,218 291,168"/>
+    <rect x="462" y="240" width="34" height="40"/><polygon points="458,240 500,240 479,208"/>
+    <path d="M120 286V268l14-14 14 14v18zM160 286V262l16-16 16 16v24zM380 286V266l14-14 14 14v20zM418 286V270l12-12 12 12v16z"/>
+  </g>
+  <path class="i-seaf" d="M0 306 Q35 298 70 306 T140 306 T210 306 T280 306 T350 306 T420 306 T490 306 T560 306 V380 H0Z"/>
+  <path class="i-ink i-thin" d="M0 326 Q35 320 70 326 T140 326 T210 326 T280 326 T350 326 T420 326 T490 326 T560 326" opacity=".5"/>
+  <polygon class="i-fov" points="280,158 170,306 390,306"/>
+  <g class="i-a-bob">
+    <path class="i-ink i-thin" d="M262 132 L254 152 M298 132 L306 152"/>
+    <path class="i-ink" d="M254 114 L196 90 M306 114 L364 90 M258 128 L214 144 M302 128 L346 144" stroke-width="3.5"/>
+    <ellipse class="i-a-rot i-fb" style="transform-origin:196px 86px" cx="196" cy="86" rx="36" ry="7"/>
+    <ellipse class="i-a-rot i-fb" style="transform-origin:364px 86px" cx="364" cy="86" rx="36" ry="7"/>
+    <ellipse class="i-a-rot i-fb" style="transform-origin:214px 141px" cx="214" cy="141" rx="36" ry="7"/>
+    <ellipse class="i-a-rot i-fb" style="transform-origin:346px 141px" cx="346" cy="141" rx="36" ry="7"/>
+    <circle class="i-fk" cx="196" cy="88" r="4"/><circle class="i-fk" cx="364" cy="88" r="4"/><circle class="i-fk" cx="214" cy="143" r="4"/><circle class="i-fk" cx="346" cy="143" r="4"/>
+    <rect class="i-ink i-fl" x="252" y="108" width="56" height="24" rx="10"/>
+    <path class="i-ink i-fs" d="M264 108 Q280 92 296 108"/>
+    <path class="i-ink" d="M280 132 V138"/>
+    <circle class="i-fk" cx="280" cy="150" r="12"/><circle class="i-fb" cx="280" cy="150" r="5"/><circle class="i-fw" cx="282" cy="148" r="1.6"/>
+  </g>
+  <circle class="i-a-blink" cx="44" cy="44" r="7" fill="#E5322D"/>
+  <text class="i-lbk" x="58" y="49">REC</text>
+  <text class="i-lbl" x="280" y="358">Prises de vues aériennes</text>
+</g></svg>
+          </div>
+        </div>
+        <div>
+          <h3>Prises de vues drone</h3>
+          <p class="what">Captures aériennes uniques pour vos événements et projets.</p>
+          <span class="p-price">À partir de 30&nbsp;€</span>
+          <div class="p-ask"><button type="button" class="item" data-need="n2" data-label="une prise de vues par drone">Demander une prise de vues</button></div>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="p-card">
+          <div class="illus-frame reveal">
+            <svg viewBox="0 0 560 380" role="img" aria-label="Illustration : un petit appareil électroménager ouvert, en cours de réparation avec un tournevis."><g class="i-sc" data-scene="repair">
+  <rect class="i-ink i-fl" x="56" y="304" width="448" height="16" rx="3"/>
+  <rect class="i-fk" x="176" y="304" width="26" height="8" rx="2"/><rect class="i-fk" x="300" y="304" width="26" height="8" rx="2"/>
+  <rect class="i-ink i-fl" x="150" y="190" width="200" height="114" rx="28"/>
+  <rect class="i-fk" x="188" y="200" width="60" height="12" rx="6"/><rect class="i-fk" x="262" y="200" width="60" height="12" rx="6"/>
+  <rect class="i-ink i-fo" x="350" y="232" width="14" height="34" rx="4"/>
+  <rect class="i-ink i-fs" x="176" y="226" width="148" height="58" rx="8"/>
+  <path class="i-wire" d="M296 240 H312 V272 H290"/>
+  <g class="i-a-gear2" style="transform-origin:266px 262px"><circle class="i-gt" cx="266" cy="262" r="12"/><circle class="i-ink i-fb" cx="266" cy="262" r="8"/></g>
+  <g class="i-a-gear" style="transform-origin:222px 254px"><circle class="i-gt" cx="222" cy="254" r="20"/><circle class="i-ink i-fb" cx="222" cy="254" r="15"/><circle class="i-fs" cx="222" cy="254" r="5"/></g>
+  <g transform="rotate(-14 114 266)"><rect class="i-ink i-fr" x="84" y="228" width="60" height="76" rx="6"/><circle class="i-ink i-fs" cx="98" cy="242" r="5"/><circle class="i-ink i-fs" cx="130" cy="290" r="5"/></g>
+  <circle class="i-ink i-fs" cx="338" cy="212" r="6"/><path class="i-ink i-thin" d="M334 212h8M338 208v8"/>
+  <g class="i-a-driver" style="transform-origin:338px 212px">
+    <line x1="338" y1="212" x2="400" y2="158" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+    <line x1="398" y1="160" x2="430" y2="128" stroke="var(--ink)" stroke-width="26" stroke-linecap="round"/>
+    <line x1="398" y1="160" x2="430" y2="128" stroke="#FF7A1A" stroke-width="20" stroke-linecap="round"/>
+  </g>
+  <g class="i-a-pop" style="transform-origin:96px 130px"><circle class="i-fb" cx="96" cy="130" r="28"/><path d="M83 131 l9 9 l17 -19" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <path class="i-fo i-a-star" style="transform-origin:404px 236px" d="M404 226 L407 233 L414 236 L407 239 L404 246 L401 239 L394 236 L401 233Z"/>
+  <path class="i-fo i-a-star2" style="transform-origin:150px 178px" d="M150 170 L152 176 L158 178 L152 180 L150 186 L148 180 L142 178 L148 176Z"/>
+  <text class="i-lbl" x="280" y="358">Réparé, comme neuf</text>
+</g></svg>
+          </div>
+        </div>
+        <div>
+          <h3>Réparation d'objets</h3>
+          <p class="what">Restauration et réparation de vos objets du quotidien, petit électroménager.</p>
+          <span class="p-price">À partir de 15&nbsp;€</span>
+          <div class="p-ask"><button type="button" class="item" data-need="n3" data-label="une réparation d'objet">Demander une réparation</button></div>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="p-card">
+          <div class="illus-frame reveal">
+            <svg viewBox="0 0 560 380" role="img" aria-label="Illustration : un moulinet de pêche démonté et nettoyé pour son entretien d'hiver."><g class="i-sc" data-scene="reel">
+  <rect class="i-ink i-fo" x="150" y="322" width="260" height="14" rx="7"/>
+  <rect class="i-ink i-fl" x="262" y="292" width="36" height="34" rx="5"/>
+  <circle class="i-ink i-fl" cx="280" cy="214" r="60"/>
+  <rect class="i-ink i-fl" x="266" y="262" width="28" height="34" rx="4"/>
+  <rect class="i-ink i-fr" x="226" y="98" width="108" height="60" rx="14"/>
+  <path class="i-ink i-thin" d="M236 110H324M236 120H324M236 130H324M236 140H324M236 150H324" opacity=".45"/>
+  <rect class="i-ink i-fl" x="216" y="92" width="128" height="12" rx="6"/>
+  <rect class="i-ink i-fl" x="216" y="152" width="128" height="12" rx="6"/>
+  <path class="i-ink" d="M216 98 C216 44 344 44 344 98" stroke-width="4"/>
+  <circle class="i-ink i-fs" cx="280" cy="62" r="7"/>
+  <g class="i-a-crank" style="transform-origin:280px 214px">
+    <line x1="280" y1="214" x2="352" y2="214" stroke="var(--ink)" stroke-width="13" stroke-linecap="round"/>
+    <line x1="280" y1="214" x2="352" y2="214" stroke="var(--face-l)" stroke-width="8" stroke-linecap="round"/>
+    <circle class="i-ink i-fo" cx="362" cy="214" r="13"/>
+  </g>
+  <circle class="i-ink i-fb" cx="280" cy="214" r="15"/><circle class="i-fs" cx="280" cy="214" r="5"/>
+  <g class="i-snow" style="animation-delay:-0.2s"><path d="M110 96h12M116 90v12M111.5 91.5l9 9M120.5 91.5l-9 9"/></g>
+  <g class="i-snow" style="animation-delay:-2.2s"><path d="M150 190h12M156 184v12M151.5 185.5l9 9M160.5 185.5l-9 9"/></g>
+  <g class="i-snow" style="animation-delay:-1.2s"><path d="M430 110h12M436 104v12M431.5 105.5l9 9M440.5 105.5l-9 9"/></g>
+  <g class="i-snow" style="animation-delay:-3.4s"><path d="M470 196h12M476 190v12M471.5 191.5l9 9M480.5 191.5l-9 9"/></g>
+  <g class="i-snow" style="animation-delay:-4.2s"><path d="M396 60h12M402 54v12M397.5 55.5l9 9M406.5 55.5l-9 9"/></g>
+  <path class="i-fb" d="M120 262 C120 262 106 280 106 290 a14 14 0 0 0 28 0 C134 280 120 262 120 262Z"/>
+  <path class="i-fo i-a-star" style="transform-origin:236px 190px" d="M236 180 L239 187 L246 190 L239 193 L236 200 L233 193 L226 190 L233 187Z"/>
+  <text class="i-lbl" x="280" y="368">Entretien complet</text>
+</g></svg>
+          </div>
+        </div>
+        <div>
+          <h3>Hivernage de moulinet</h3>
+          <p class="what">Entretien complet pour préparer vos moulinets à la saison prochaine.</p>
+          <span class="p-price">À partir de 15&nbsp;€</span>
+          <div class="p-ask"><button type="button" class="item" data-need="n4" data-label="un hivernage de moulinet">Demander un hivernage</button></div>
+        </div>
+      </article>
     </div>
-</section>
+  </section>
+
+  <section id="atelier-3d" class="section wrap" aria-labelledby="t-atelier">
+    <div class="section-head">
+      <h2 id="t-atelier">Atelier 3D : configurez une pièce</h2>
+      <p class="lede">Réglez les cotes, choisissez un filament et lancez l'impression. Le modèle, le volume et la masse se mettent à jour en direct — un aperçu de ce que je peux imprimer pour vous.</p>
+    </div>
+    <div class="lab">
+      <div>
+        <div class="stage" id="stage" tabindex="0" role="img" aria-label="Aperçu 3D interactif de la pièce. Faites glisser pour la faire tourner, ou utilisez les flèches du clavier.">
+          <canvas id="gl"></canvas>
+          <p class="hud" id="hud"></p>
+          <p class="hint">Faites glisser pour tourner la pièce</p>
+          <p class="glfail" id="glfail" hidden>L'aperçu 3D n'a pas pu se charger sur cet appareil. Le calcul des cotes reste disponible.</p>
+        </div>
+        <div class="tools">
+          <div class="tools-row">
+            <div class="chips" role="radiogroup" aria-label="Affichage">
+              <input type="radio" name="view" id="v1" value="solid" checked><label for="v1">Plein</label>
+              <input type="radio" name="view" id="v2" value="wire"><label for="v2">Fil de fer</label>
+            </div>
+            <button class="btn btn-primary btn-sm" type="button" id="play">Lancer l'impression</button>
+          </div>
+          <div class="layer">
+            <label for="layer">Avancement de l'impression</label>
+            <input type="range" id="layer" min="0" max="100" value="100">
+            <span class="layer-out" id="layerOut" aria-live="off"></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="param"><label for="pw">Largeur</label><output id="pwo" for="pw"></output><input type="range" id="pw" min="20" max="100" step="1" value="60"></div>
+        <div class="param"><label for="pd">Profondeur</label><output id="pdo" for="pd"></output><input type="range" id="pd" min="20" max="100" step="1" value="40"></div>
+        <div class="param"><label for="ph">Hauteur</label><output id="pho" for="ph"></output><input type="range" id="ph" min="5" max="60" step="1" value="20"></div>
+        <div class="param"><label for="pk">Perçage central</label><output id="pko" for="pk"></output><input type="range" id="pk" min="0" max="30" step="1" value="12"></div>
+        <div class="param"><label for="pr">Angles arrondis</label><output id="pro" for="pr"></output><input type="range" id="pr" min="0" max="12" step="1" value="4"></div>
+        <fieldset>
+          <legend>Filament</legend>
+          <div class="swatches">
+            <input type="radio" name="fil" id="c1" value="#0B3FE0" data-name="bleu" checked><label for="c1" style="background:#0B3FE0"><span class="sr-only">Bleu</span></label>
+            <input type="radio" name="fil" id="c2" value="#1C2233" data-name="noir"><label for="c2" style="background:#1C2233"><span class="sr-only">Noir</span></label>
+            <input type="radio" name="fil" id="c3" value="#F2F4FA" data-name="blanc"><label for="c3" style="background:#F2F4FA"><span class="sr-only">Blanc</span></label>
+            <input type="radio" name="fil" id="c4" value="#FF7A1A" data-name="orange"><label for="c4" style="background:#FF7A1A"><span class="sr-only">Orange</span></label>
+          </div>
+        </fieldset>
+        <dl class="readout-3d">
+          <div><dt>Dimensions</dt><dd id="rDim"></dd></div>
+          <div><dt>Volume</dt><dd id="rVol"></dd></div>
+          <div><dt>Masse</dt><dd id="rMass"></dd></div>
+        </dl>
+        <button class="btn btn-primary" type="button" id="askPart">Demander cette pièce</button>
+        <p class="fine">Masse estimée pour une pièce pleine en PLA (1,24 g/cm³), hors supports. Le devis dépend du projet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="apropos" class="section wrap" aria-labelledby="t-apropos">
+    <div class="who">
+      <div>
+        <h2 id="t-apropos">À propos de moi</h2>
+        <p class="lede">Bonjour et bienvenue sur mon site. Je m'appelle Léo, créateur de MEKA PRINT à 15 ans. Je suis un jeune maker basé à Saint-Malo, passionné depuis toujours par la technologie, l'innovation et la fabrication.</p>
+        <p class="lede">J'ai commencé avec l'impression 3D, puis j'ai élargi mes compétences vers la prise de vues par drone, l'hivernage de moulinet et la réparation d'objets du quotidien. Mon objectif : mettre ma créativité au service des particuliers, avec des solutions utiles, innovantes et accessibles.</p>
+      </div>
+      <div>
+        <p class="tip" style="margin-bottom:.75rem">Ce qui m'anime :</p>
+        <ul class="audience" id="audience"></ul>
+        <p class="who-note" id="whoNote" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="methode" class="on-surface" aria-labelledby="t-methode">
+    <span class="ramparts ramparts-surface" aria-hidden="true"></span>
+    <div class="section section-top wrap">
+      <div class="section-head">
+        <h2 id="t-methode">Comment ça marche</h2>
+        <p class="lede">Quatre étapes, du premier message à la livraison. Cliquez sur une étape pour voir ce qui s'y passe.</p>
+      </div>
+      <div class="stepper" role="tablist" aria-label="Étapes de la méthode" id="stepper">
+        <div class="track" aria-hidden="true"><i id="fill"></i></div>
+      </div>
+      <div class="step-panel" id="stepPanel" role="tabpanel" tabindex="0"></div>
+      <p class="method-note">Je pars de votre besoin pour vous proposer une solution adaptée, au juste prix.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="rel" aria-labelledby="t-contact">
+    <span class="ramparts ramparts-band" aria-hidden="true"></span>
+    <div class="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <h2 id="t-contact">Vous avez un projet ?</h2>
+          <p class="lede">Contactez-moi pour présenter votre besoin et obtenir un devis. Tarifs indicatifs, devis établi selon votre demande.</p>
+          <ul class="coords" id="coords"></ul>
+        </div>
+
+        <div class="panel">
+          <h3>Décrivez votre besoin</h3>
+          <form id="brief" novalidate>
+            <fieldset>
+              <legend>Vous cherchez</legend>
+              <div class="chips">
+                <input type="radio" name="need" id="n1" value="une impression 3D"><label for="n1">Une impression 3D</label>
+                <input type="radio" name="need" id="n2" value="une prise de vues par drone"><label for="n2">Une prise de vues drone</label>
+                <input type="radio" name="need" id="n3" value="une réparation d'objet"><label for="n3">Une réparation</label>
+                <input type="radio" name="need" id="n4" value="un hivernage de moulinet"><label for="n4">Un hivernage de moulinet</label>
+                <input type="radio" name="need" id="n5" value="un autre projet"><label for="n5">Autre projet</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="details">Votre projet en quelques lignes</label>
+              <textarea id="details" placeholder="Ce que vous voulez faire, pour qui, dans quel délai."></textarea>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="fname">Votre nom</label>
+                <input id="fname" type="text" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="reach">Email ou téléphone</label>
+                <input id="reach" type="text" autocomplete="email">
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Préparer mon message</button>
+          </form>
+
+          <div class="readout" id="readout" hidden>
+            <p>Votre message est prêt. Copiez-le, ou envoyez-le-moi directement par email.</p>
+            <textarea id="msg" readonly aria-label="Message préparé"></textarea>
+            <div class="actions">
+              <button class="btn btn-primary" type="button" id="copy">Copier le message</button>
+              <a class="btn btn-ghost" id="mailto" href="#" hidden>Ouvrir dans ma messagerie</a>
+            </div>
+            <p class="status" id="status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
-    <p>&copy; 2025 MEKA PRINT - Tous droits réservés</p>
+  <svg class="skyline" id="skyline" viewBox="0 0 1200 150" role="img" aria-label="Silhouette des remparts et des toits de Saint-Malo">
+    <g fill="currentColor">
+      <path id="merlons" d=""/>
+      <rect x="0" y="112" width="1200" height="40"/>
+      <!-- tour de gauche -->
+      <rect x="70" y="66" width="52" height="48"/>
+      <polygon points="64,66 128,66 96,20"/>
+      <!-- cathédrale -->
+      <rect x="540" y="84" width="170" height="30"/>
+      <rect x="590" y="40" width="34" height="44"/>
+      <polygon points="587,40 627,40 607,2"/>
+      <polygon points="545,84 557,84 551,62"/>
+      <polygon points="693,84 705,84 699,62"/>
+      <!-- tour de droite -->
+      <rect x="1010" y="58" width="52" height="56"/>
+      <polygon points="1004,58 1068,58 1036,12"/>
+      <!-- bastion -->
+      <rect x="290" y="88" width="70" height="26"/>
+      <g id="houses"></g>
+    </g>
+    <g style="fill:var(--bg)">
+      <rect x="92" y="80" width="8" height="13"/>
+      <rect x="1032" y="72" width="8" height="13"/>
+      <rect x="603" y="54" width="8" height="15"/>
+      <g id="windows"></g>
+    </g>
+  </svg>
+  <div class="sea">
+    <div class="waves" aria-hidden="true">
+      <svg class="w-b" viewBox="0 0 2400 16" preserveAspectRatio="none"><path class="w2" id="wave2" d=""/></svg>
+    </div>
+    <div class="waves" aria-hidden="true" style="top:-10px">
+      <svg class="w-a" viewBox="0 0 2400 16" preserveAspectRatio="none"><path class="w1" id="wave1" d=""/></svg>
+    </div>
+    <div class="wrap">
+      <span><span class="brand">MEKA PRINT</span>, Saint-Malo</span>
+      <span>Léo — services créatifs et innovants pour les particuliers.</span>
+    </div>
+  </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  var CONTACT = {
+    email: "mekaprint.bzh@gmail.com",
+    instagram: "https://www.instagram.com/mekaprint.bzh",
+    facebook: "https://www.facebook.com/mekaprint",
+    youtube: "https://www.youtube.com/@mekaprint"
+  };
+  var ICONS = {
+    email: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h-2a4 4 0 00-4 4v3H7v4h2v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.3v5.4l5-2.7z" fill="currentColor" stroke="none"/></svg>'
+  };
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- Contact : coordonnées + pré-remplissage ---------- */
+  function prefill(needId, text) {
+    var r = $(needId); if (r) r.checked = true;
+    var t = $("details");
+    var cur = t.value.trim();
+    if (cur.indexOf(text) === -1) t.value = text + (cur ? "\n" + cur : "");
+    $("contact").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    setTimeout(function () { try { t.focus({ preventScroll: true }); } catch (e) { t.focus(); } }, 550);
+  }
+
+  (function contact() {
+    var list = $("coords");
+    var rows = [
+      ["email", "Email", CONTACT.email, CONTACT.email ? "mailto:" + CONTACT.email : ""],
+      ["instagram", "Instagram", "@mekaprint.bzh", CONTACT.instagram],
+      ["facebook", "Facebook", "mekaprint", CONTACT.facebook],
+      ["youtube", "YouTube", "@mekaprint", CONTACT.youtube]
+    ];
+    rows.forEach(function (r) {
+      var li = document.createElement("li");
+      var k = document.createElement("span"); k.className = "k";
+      k.innerHTML = ICONS[r[0]] + '<span style="margin-left:.5rem">' + r[1] + "</span>";
+      k.style.display = "flex"; k.style.alignItems = "center";
+      var v;
+      if (r[2] && r[3]) { v = document.createElement("a"); v.href = r[3]; v.target = "_blank"; v.rel = "noopener"; v.textContent = r[2]; }
+      else { v = document.createElement("span"); v.textContent = r[2] || "À compléter"; if (!r[2]) v.className = "todo"; }
+      li.appendChild(k); li.appendChild(v); list.appendChild(li);
+    });
+
+    var form = $("brief"), readout = $("readout"), msg = $("msg"), status = $("status"), mailto = $("mailto");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var need = form.querySelector('input[name="need"]:checked');
+      var details = $("details").value.trim();
+      var name = $("fname").value.trim();
+      var reach = $("reach").value.trim();
+      var text = "Bonjour Léo,\n\nJe cherche " + (need ? need.value : "de l'aide pour un projet") + ".\n";
+      if (details) text += "\n" + details + "\n";
+      text += "\nMerci de me recontacter" + (name ? ", " + name : "") + (reach ? " (" + reach + ")" : "") + ".";
+      msg.value = text;
+      readout.hidden = false;
+      status.textContent = "";
+      if (CONTACT.email) {
+        mailto.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Demande de devis") + "&body=" + encodeURIComponent(text);
+        mailto.hidden = false;
+      }
+      try { readout.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); } catch (err) {}
+    });
+    $("copy").addEventListener("click", function () {
+      function done(ok) { status.textContent = ok ? "Message copié." : "Sélectionnez le texte puis copiez-le manuellement."; }
+      function fallback() { try { msg.focus(); msg.select(); done(document.execCommand("copy")); } catch (e2) { done(false); } }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(msg.value).then(function () { done(true); }, fallback);
+        else fallback();
+      } catch (err) { fallback(); }
+    });
+  })();
+
+  /* ---------- Prestations cliquables ---------- */
+  document.querySelectorAll(".item").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var label = b.getAttribute("data-label") || b.textContent.trim();
+      prefill(b.getAttribute("data-need"), "Je m'intéresse à : " + label + ".");
+    });
+  });
+
+  /* ---------- Illustrations : révélées au défilement ---------- */
+  (function reveal() {
+    var els = document.querySelectorAll(".illus-frame");
+    if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.25 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  /* ---------- Progression de lecture + halo de grille du hero ---------- */
+  (function scrollFx() {
+    var bar = $("progress"), ticking = false;
+    function update() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      bar.style.setProperty("--p", p.toFixed(4));
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+
+    var hero = $("hero");
+    hero.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var r = hero.getBoundingClientRect();
+      hero.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      hero.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+    hero.addEventListener("pointerleave", function () {
+      hero.style.setProperty("--mx", "-400px"); hero.style.setProperty("--my", "-400px");
+    });
+  })();
+
+  /* ---------- Atelier 3D ---------- */
+  (function atelier() {
+    var P = { w: 60, d: 40, h: 20, hole: 12, r: 4, color: "#0B3FE0", colorName: "bleu" };
+    var prog = 1, playing = false, view = "solid";
+    var K = 1 / 50;
+
+    var sl = { w: $("pw"), d: $("pd"), h: $("ph"), hole: $("pk"), r: $("pr") };
+    var outs = { w: $("pwo"), d: $("pdo"), h: $("pho"), hole: $("pko"), r: $("pro") };
+
+    function fmt(n, dec) { return n.toFixed(dec).replace(".", ","); }
+
+    function calc() {
+      var area = P.w * P.d - (4 - Math.PI) * P.r * P.r - Math.PI * Math.pow(P.hole / 2, 2);
+      var volMm3 = area * P.h;
+      var cm3 = volMm3 / 1000;
+      return { cm3: cm3, g: cm3 * 1.24, layers: Math.max(1, Math.round(P.h / 0.2)) };
+    }
+
+    function limits() {
+      var m = Math.min(P.w, P.d);
+      var holeMax = Math.max(0, m - 10);
+      if (P.hole > holeMax) P.hole = holeMax;
+      sl.hole.max = holeMax; sl.hole.value = P.hole;
+      var rMax = Math.max(0, Math.min(12, Math.floor((m - P.hole) / 2 - 1)));
+      if (P.r > rMax) P.r = rMax;
+      sl.r.max = rMax; sl.r.value = P.r;
+    }
+
+    function readouts() {
+      outs.w.textContent = P.w + " mm"; outs.d.textContent = P.d + " mm"; outs.h.textContent = P.h + " mm";
+      outs.hole.textContent = P.hole > 0 ? "Ø " + P.hole + " mm" : "aucun";
+      outs.r.textContent = P.r > 0 ? P.r + " mm" : "aucun";
+      var c = calc();
+      $("rDim").textContent = P.w + " × " + P.d + " × " + P.h;
+      $("rVol").textContent = fmt(c.cm3, 1) + " cm³";
+      $("rMass").textContent = Math.round(c.g) + " g";
+      $("hud").textContent = P.w + " × " + P.d + " × " + P.h + " mm" + (P.hole > 0 ? "   Ø " + P.hole : "");
+      layerText();
+    }
+    function layerText() {
+      var c = calc();
+      $("layerOut").textContent = "Couche " + Math.round(prog * c.layers) + " sur " + c.layers + " (0,2 mm par couche)";
+      $("layer").value = Math.round(prog * 100);
+    }
+
+    /* --- 3D --- */
+    var ok = typeof THREE !== "undefined", renderer, scene, camera, body, mesh, edges, grid, nozzle, rot = 0.6, tilt = 0.0, autoPause = 0;
+    var stage = $("stage"), canvas = $("gl");
+
+    function makeShape() {
+      var s = new THREE.Shape(), x = P.w / 2, y = P.d / 2, r = P.r, PI = Math.PI;
+      if (r > 0) {
+        s.moveTo(-x + r, -y); s.lineTo(x - r, -y); s.absarc(x - r, -y + r, r, -PI / 2, 0, false);
+        s.lineTo(x, y - r); s.absarc(x - r, y - r, r, 0, PI / 2, false);
+        s.lineTo(-x + r, y); s.absarc(-x + r, y - r, r, PI / 2, PI, false);
+        s.lineTo(-x, -y + r); s.absarc(-x + r, -y + r, r, PI, 1.5 * PI, false);
+        s.closePath();
+      } else {
+        s.moveTo(-x, -y); s.lineTo(x, -y); s.lineTo(x, y); s.lineTo(-x, y); s.closePath();
+      }
+      if (P.hole > 0) { var p = new THREE.Path(); p.absarc(0, 0, P.hole / 2, 0, PI * 2, true); s.holes.push(p); }
+      return s;
+    }
+    function rebuild() {
+      if (!ok || !mesh) return;
+      var g = new THREE.ExtrudeGeometry(makeShape(), { depth: P.h, bevelEnabled: false, curveSegments: 40 });
+      g.rotateX(-Math.PI / 2); g.scale(K, K, K);
+      mesh.geometry.dispose(); mesh.geometry = g;
+      edges.geometry.dispose(); edges.geometry = new THREE.EdgesGeometry(g, 20);
+      applyProgress();
+    }
+    function applyProgress() {
+      if (!ok || !body) return;
+      body.scale.y = Math.max(prog, 0.001);
+      nozzle.visible = prog > 0 && prog < 1;
+    }
+    function themeColors() {
+      if (!ok) return;
+      var cs = getComputedStyle(document.documentElement);
+      var blue = cs.getPropertyValue("--blue").trim() || "#0B3FE0";
+      var ink = cs.getPropertyValue("--ink").trim() || "#101A3A";
+      try { edges.material.color.set(ink); grid.material.color.set(blue); } catch (e) {}
+    }
+    function init() {
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      } catch (e) { ok = false; $("glfail").hidden = false; return; }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x000000, 0);
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(35, 4 / 3, 0.1, 50);
+      camera.position.set(0, 2.7, 5.8); camera.lookAt(0, 0.45, 0);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+      var l1 = new THREE.DirectionalLight(0xffffff, 0.85); l1.position.set(3, 6, 4); scene.add(l1);
+      var l2 = new THREE.DirectionalLight(0xffffff, 0.35); l2.position.set(-4, 2, -3); scene.add(l2);
+      grid = new THREE.GridHelper(4.4, 22, 0xffffff, 0xffffff);
+      grid.material.transparent = true; grid.material.opacity = 0.35; scene.add(grid);
+      body = new THREE.Group();
+      mesh = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: P.color, roughness: 0.5, metalness: 0.1, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }));
+      edges = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x101A3A }));
+      body.add(mesh); body.add(edges);
+      scene.add(body);
+      var cone = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.2, 20), new THREE.MeshStandardMaterial({ color: 0xFF7A1A, roughness: 0.4 }));
+      cone.rotation.x = Math.PI; cone.position.y = 0.1;
+      nozzle = new THREE.Group(); nozzle.add(cone); scene.add(nozzle); nozzle.visible = false;
+      themeColors();
+      rebuild();
+      resize();
+      if (window.ResizeObserver) new ResizeObserver(resize).observe(stage); else window.addEventListener("resize", resize);
+      if (window.matchMedia) {
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        if (mq.addEventListener) mq.addEventListener("change", themeColors);
+      }
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (en) { setVisible(en[0].isIntersecting); }, { threshold: 0.05 }).observe(stage);
+      } else setVisible(true);
+    }
+    function resize() {
+      if (!ok || !renderer) return;
+      var w = stage.clientWidth, h = stage.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      draw();
+    }
+
+    var visible = false, running = false, last = 0;
+    function setVisible(v) { visible = v; if (v && !running) { running = true; last = performance.now(); requestAnimationFrame(frame); } }
+    function frame(now) {
+      if (!visible) { running = false; return; }
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (playing) {
+        prog += dt / 6;
+        if (prog >= 1) { prog = 1; playing = false; $("play").textContent = "Relancer l'impression"; }
+        applyProgress(); layerText();
+      }
+      if (!reduceMotion && now > autoPause && !dragging) rot += dt * 0.35;
+      draw(now);
+      requestAnimationFrame(frame);
+    }
+    function draw(now) {
+      if (!ok || !renderer) return;
+      var t = (now || performance.now()) / 1000;
+      body.rotation.y = rot; body.rotation.x = 0;
+      scene.rotation.x = tilt;
+      var top = P.h * K * prog;
+      nozzle.position.set(Math.sin(t * 3) * (P.w * K * 0.34), top, Math.cos(t * 2.3) * (P.d * K * 0.34));
+      nozzle.rotation.y = 0;
+      // la buse tourne avec la pièce
+      var c = Math.cos(rot), s = Math.sin(rot), nx = nozzle.position.x, nz = nozzle.position.z;
+      nozzle.position.x = nx * c + nz * s; nozzle.position.z = -nx * s + nz * c;
+      nozzle.position.y = top + 0.0;
+      renderer.render(scene, camera);
+    }
+
+    /* interactions souris / tactile / clavier */
+    var dragging = false, lx = 0, ly = 0;
+    stage.addEventListener("pointerdown", function (e) { dragging = true; lx = e.clientX; ly = e.clientY; stage.classList.add("dragging"); try { stage.setPointerCapture(e.pointerId); } catch (x) {} });
+    stage.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      rot += (e.clientX - lx) * 0.012;
+      if (e.pointerType === "mouse") tilt = Math.max(-0.25, Math.min(0.4, tilt + (e.clientY - ly) * 0.004));
+      lx = e.clientX; ly = e.clientY; autoPause = performance.now() + 3000;
+      if (!visible || reduceMotion) draw();
+    });
+    function up() { dragging = false; stage.classList.remove("dragging"); autoPause = performance.now() + 3000; }
+    stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
+    stage.addEventListener("keydown", function (e) {
+      var used = true;
+      if (e.key === "ArrowLeft") rot -= 0.2; else if (e.key === "ArrowRight") rot += 0.2;
+      else if (e.key === "ArrowUp") tilt = Math.max(-0.25, tilt - 0.06); else if (e.key === "ArrowDown") tilt = Math.min(0.4, tilt + 0.06);
+      else used = false;
+      if (used) { e.preventDefault(); autoPause = performance.now() + 3000; draw(); }
+    });
+
+    /* contrôles */
+    ["w", "d", "h", "hole", "r"].forEach(function (k) {
+      sl[k].addEventListener("input", function () {
+        P[k] = parseInt(sl[k].value, 10);
+        limits(); readouts(); rebuild(); draw();
+      });
+    });
+    document.querySelectorAll('input[name="fil"]').forEach(function (i) {
+      i.addEventListener("change", function () {
+        P.color = i.value; P.colorName = i.getAttribute("data-name");
+        if (ok && mesh) { mesh.material.color.set(P.color); draw(); }
+      });
+    });
+    document.querySelectorAll('input[name="view"]').forEach(function (i) {
+      i.addEventListener("change", function () {
+        view = i.value;
+        if (ok && mesh) { mesh.material.wireframe = view === "wire"; draw(); }
+      });
+    });
+    $("layer").addEventListener("input", function () {
+      playing = false; $("play").textContent = "Lancer l'impression";
+      prog = parseInt($("layer").value, 10) / 100;
+      applyProgress(); layerText(); draw();
+    });
+    $("play").addEventListener("click", function () {
+      if (playing) { playing = false; $("play").textContent = "Reprendre l'impression"; return; }
+      if (prog >= 1) prog = 0;
+      playing = true; $("play").textContent = "Mettre en pause";
+      if (ok && !visible) setVisible(true);
+      applyProgress(); layerText();
+    });
+    $("askPart").addEventListener("click", function () {
+      var c = calc();
+      var txt = "Pièce configurée : " + P.w + " × " + P.d + " × " + P.h + " mm"
+        + (P.hole > 0 ? ", perçage Ø " + P.hole + " mm" : ", sans perçage")
+        + (P.r > 0 ? ", angles arrondis " + P.r + " mm" : "")
+        + ", filament " + P.colorName + ". Volume environ " + fmt(c.cm3, 1) + " cm³, masse environ " + Math.round(c.g) + " g (pleine, PLA).";
+      prefill("n1", txt);
+    });
+
+    limits(); readouts();
+    if (ok) init(); else $("glfail").hidden = false;
+  })();
+
+  /* ---------- À propos ---------- */
+  (function apropos() {
+    var A = [
+      ["Impression 3D", "Ma première passion : dessiner un objet puis le voir apparaître, couche après couche, sur le plateau de l'imprimante."],
+      ["Drone", "J'aime prendre de la hauteur pour capturer Saint-Malo et ses environs sous un angle différent."],
+      ["Réparation", "Réparer plutôt que jeter : redonner vie à un appareil du quotidien, c'est toujours satisfaisant."],
+      ["Bricolage", "Depuis petit, j'aime comprendre comment les choses fonctionnent, et les fabriquer moi-même."],
+      ["Innovation", "Tester de nouveaux outils, de nouvelles idées, pour proposer des solutions accessibles à tous."]
+    ];
+    var ul = $("audience"), note = $("whoNote");
+    function select(i) {
+      ul.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+      note.textContent = A[i][1];
+    }
+    A.forEach(function (a, i) {
+      var li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.textContent = a[0]; b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { select(i); });
+      li.appendChild(b); ul.appendChild(li);
+    });
+    select(0);
+  })();
+
+  /* ---------- Méthode ---------- */
+  (function methode() {
+    var S = [
+      ["Besoin", "Vous m'expliquez votre idée ou votre problème.", "Votre idée, vos contraintes, une photo ou les cotes de l'objet si vous les avez.", "Je pose les bonnes questions et je cadre ce qu'il faut réaliser."],
+      ["Devis", "Je vous propose un prix pour la prestation.", "Votre accord sur le devis proposé.", "Je prépare le modèle 3D, ou je planifie la prise de vues ou la réparation."],
+      ["Réalisation", "Je réalise ce qui a été convenu.", "Rien de plus, je vous tiens informé si besoin.", "J'imprime la pièce, je pilote le drone, ou je répare l'objet."],
+      ["Livraison", "Vous récupérez une solution prête à l'emploi.", "Une vérification : tout répond-il bien à votre besoin ?", "Je vous remets la pièce, les images ou l'objet réparé."]
+    ];
+    var wrap = $("stepper"), panel = $("stepPanel"), fill = $("fill"), tabs = [], cur = 0;
+    S.forEach(function (s, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "step-tab"; b.setAttribute("role", "tab"); b.id = "step-tab-" + i;
+      b.setAttribute("aria-controls", "stepPanel");
+      b.innerHTML = '<span class="node">' + (i + 1) + '</span><span class="lbl">' + s[0] + "</span>";
+      b.addEventListener("click", function () { go(i, false); });
+      b.addEventListener("keydown", function (e) {
+        var n = null;
+        if (e.key === "ArrowRight") n = (cur + 1) % S.length; else if (e.key === "ArrowLeft") n = (cur + S.length - 1) % S.length;
+        else if (e.key === "Home") n = 0; else if (e.key === "End") n = S.length - 1;
+        if (n !== null) { e.preventDefault(); go(n, true); }
+      });
+      wrap.appendChild(b); tabs.push(b);
+    });
+    function go(i, focus) {
+      cur = i;
+      tabs.forEach(function (t, j) {
+        t.setAttribute("aria-selected", j === i ? "true" : "false");
+        t.setAttribute("tabindex", j === i ? "0" : "-1");
+        t.classList.toggle("done", j < i);
+      });
+      fill.style.setProperty("--fill", (i / (S.length - 1) * 100) + "%");
+      var s = S[i];
+      panel.setAttribute("aria-labelledby", "step-tab-" + i);
+      var np = panel.cloneNode(false);
+      np.innerHTML = '<span class="bignum" aria-hidden="true">' + (i + 1) + '</span><div><h3>' + s[0] + '</h3><p style="margin-top:.5rem">' + s[1] + '</p></div><div><h4>Vous apportez</h4><p>' + s[2] + '</p><h4 style="margin-top:1rem">Je fais</h4><p>' + s[3] + "</p></div>";
+      panel.parentNode.replaceChild(np, panel); panel = np;
+      if (focus) tabs[i].focus();
+    }
+    go(0, false);
+  })();
+
+  /* ---------- Saint-Malo : remparts, toits, vagues ---------- */
+  (function skyline() {
+    var NS = "http://www.w3.org/2000/svg";
+    var d = ""; for (var x = 0; x < 1200; x += 30) d += "M" + x + " 98h18v14h-18z";
+    $("merlons").setAttribute("d", d);
+    var houses = [[150,34,70],[188,30,74],[224,38,66],[266,32,72],[380,36,68],[420,32,72],[458,34,66],[500,30,74],
+                  [730,34,70],[768,38,64],[810,30,74],[846,36,68],[888,32,72],[930,34,66],[1090,34,70],[1128,32,74]];
+    var hg = $("houses"), wg = $("windows");
+    houses.forEach(function (h) {
+      var x = h[0], w = h[1], yt = h[2], yb = 90;
+      var p = document.createElementNS(NS, "path");
+      p.setAttribute("d", "M" + x + " 112V" + yb + "L" + (x + w / 2) + " " + yt + "L" + (x + w) + " " + yb + "V112Z");
+      hg.appendChild(p);
+      var r = document.createElementNS(NS, "rect");
+      r.setAttribute("x", x + w / 2 - 3); r.setAttribute("y", yb + 5); r.setAttribute("width", 6); r.setAttribute("height", 8);
+      wg.appendChild(r);
+    });
+    function wave(id, amp) {
+      var s = "M0 " + (8) + " q37.5 " + (-amp) + " 75 0";
+      for (var i = 0; i < 31; i++) s += " t75 0";
+      s += " L2400 16 L0 16 Z";
+      $(id).setAttribute("d", s);
+    }
+    wave("wave1", 8); wave("wave2", 12);
+  })();
+</script>
 </body>
 </html>
